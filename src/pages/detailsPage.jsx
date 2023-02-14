@@ -26,7 +26,7 @@ import lock from "../assets/icons/lock.svg";
 
 //IMPORTING UTILITY PACKGAES
 
-import { finish, signBid, bid } from "../utils/Bidify";
+import { /*finish, */signBid, bid } from "../utils/Bidify";
 
 //IMPORTING MEDIA ASSETS
 
@@ -59,6 +59,7 @@ const DetailsPage = () => {
     const { id } = params;
     setParamId(id);
     getLists(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getLists = async (id) => {
@@ -87,8 +88,12 @@ const DetailsPage = () => {
     });
 
     let totalLists = 0;
-    for (let log of logs) {
-      totalLists++;
+    // for (let log of logs) {
+    //   totalLists++;
+    // }
+
+    for (let i = 0; i < logs.length; i ++) {
+      totalLists ++;
     }
 
     return totalLists;
@@ -135,7 +140,7 @@ const DetailsPage = () => {
     }
 
     function imageurl(url) {
-      const string = url;
+      // const string = url;
       const check = url.substr(16, 4);
       if (check === "ipfs") {
         const manipulated = url.substr(16, 16 + 45);

@@ -26,18 +26,19 @@ import { UserContext } from "../store/contexts";
 const MarketPlace = () => {
   //INITIALIZING HOOKS
 
-  const { userState, userDispatch } = useContext(UserContext);
+  const { userState/*, userDispatch*/ } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState({});
   const [isPriceDropdown, setIsPriceDropdown] = useState(false);
   const [isBidsDropdown, setIsBidsDropdown] = useState(false);
   const [range, setRange] = useState(0);
-  const options = {method: 'GET'};
+  // const options = {method: 'GET'};
 
   useEffect(() => {
     if (userState?.liveAuctions) {
       setData(userState?.liveAuctions);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -58,6 +59,7 @@ const MarketPlace = () => {
     }
     setIsBidsDropdown(false);
     setIsPriceDropdown(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterData]);
 
   useEffect(() => {
@@ -65,6 +67,7 @@ const MarketPlace = () => {
       ({ nextBid }) => Number(nextBid) >= range
     );
     setData(filData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [range]);
 
   const renderPriceDropdown = (

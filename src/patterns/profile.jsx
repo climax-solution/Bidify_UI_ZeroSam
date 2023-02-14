@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import Web3 from "web3";
 
 //IMPORTING COMPONENTS
 
-import { Text, Button } from "../components";
+import { Text/*, Button*/ } from "../components";
 
 //IMPORTING STYLESHEET
 
@@ -68,14 +68,34 @@ const Profile = () => {
   const { account, active, chainId } = useWeb3React();
 
   const [isCopied, setIsCopied] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [toggleSwitchNetwork, setToggleSwitchNetwork] = useState(false);
   const [balance, setBalance] = useState("");
   const [networkName, setNetworkName] = useState();
 
-  useEffect(async () => {
-    if (account) setBalance(await getBalance());
-  }, [account]);
+  
+  const getBalance = useCallback(async () => {
+    try {
+      return Web3.utils.fromWei(
+        await new new Web3(window.ethereum).eth.Contract(
+          BIT.abi,
+          BIT.address[chainId]
+        ).methods
+          .balanceOf(account)
+          .call()
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, [account, chainId]);
+  
+  useEffect(() => {
+    async function run() {
+      const result = await getBalance();
+      setBalance(result);
+    }
+    if (account) run();
+  }, [account, getBalance]); 
 
   // const handleFreeToken = async () => {
   //   setIsLoading(true);
@@ -155,22 +175,7 @@ const Profile = () => {
     setToggleSwitchNetwork(false);
   };
 
-  const getBalance = async () => {
-    try {
-      return Web3.utils.fromWei(
-        await new new Web3(window.ethereum).eth.Contract(
-          BIT.abi,
-          BIT.address[chainId]
-        ).methods
-          .balanceOf(account)
-          .call()
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(async () => {
+  useEffect(() => {
     try {
       if (active) {
         switch (chainId) {

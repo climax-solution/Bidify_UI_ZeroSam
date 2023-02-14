@@ -20,7 +20,7 @@ import lock from "../assets/icons/lock.svg";
 
 //IMPORTING UTILITY PACKGAES
 
-import { finish, signBid, bid } from "../utils/Bidify";
+import { /*finish, */signBid, bid } from "../utils/Bidify";
 import { getSymbol } from "../utils/getCurrencySymbol";
 import Web3 from "web3";
 import { BIDIFY } from "../utils/config";
@@ -49,10 +49,13 @@ const Card = (props) => {
   //   return () => setIsSuccess(false);
   // }, [isSuccess]);
 
-  useEffect(async () => {
-    const res = await getSymbol(currency);
-    setSymbol(res);
-  }, []);
+  useEffect(() => {
+    async function run() {
+      const res = await getSymbol(currency);
+      setSymbol(res);
+    }
+    if (currency) run();
+  }, [currency]);
 
   const handleFinisheAuction = async () => {
     setIsLoading(true);

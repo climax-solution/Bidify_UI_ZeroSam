@@ -21,7 +21,7 @@ import pauseImg from "../assets/icons/pause-circle.svg";
 
 //IMPORTING UTILITY PACKGAES
 
-import { BIT, BIDIFY } from "../utils/config";
+import { /*BIT*/BIDIFY } from "../utils/config";
 import { getDecimals, atomic } from "../utils/Bidify";
 import { useWeb3React } from "@web3-react/core";
 import { ERC721, ERC1155 } from "../utils/config";

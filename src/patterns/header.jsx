@@ -32,6 +32,7 @@ const Header = ({ title, description }) => {
     userDispatch({
       type: "RESET",
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // HANDLING SEARCH METHOD

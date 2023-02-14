@@ -3,7 +3,7 @@ import { useWeb3React } from "@web3-react/core";
 import { FetchWrapper } from "use-nft";
 import { ethers, Contract } from "ethers";
 import Web3 from "web3";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 //IMPORTING STYLESHEET
 
@@ -12,7 +12,7 @@ import "../styles/patterns/liveauction.scss";
 //IMPORTING PATTERNS
 
 import Card from "../patterns/card";
-import { Text, Button } from "../components";
+// import { Text, Button } from "../components";
 import ScreenTemplate from "../patterns/screenTemplate";
 import NoArtifacts from "../patterns/noArtifacts";
 
@@ -35,6 +35,7 @@ const MyBiddings = () => {
 
   useEffect(() => {
     if (!userState?.isLiveAuctionFetched) getLists();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, chainId]);
 
   const getLists = async () => {
@@ -62,8 +63,8 @@ const MyBiddings = () => {
     });
 
     let totalLists = 0;
-    for (let log of logs) {
-      totalLists++;
+    for (let i = 0; i < logs.length; i ++) {
+      totalLists ++;
     }
 
     return totalLists;
@@ -110,7 +111,7 @@ const MyBiddings = () => {
     }
 
     function imageurl(url) {
-      const string = url;
+      // const string = url;
       const check = url.substr(16, 4);
       if (check === "ipfs") {
         const manipulated = url.substr(16, 16 + 45);

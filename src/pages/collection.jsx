@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { useWeb3React } from "@web3-react/core";
-import { FetchWrapper, useNft } from "use-nft";
+import { FetchWrapper, /*useNft*/ } from "use-nft";
 import Web3 from "web3";
 import { Contract, ethers } from "ethers";
 
@@ -40,6 +40,7 @@ const Collection = () => {
     } else {
       console.log("connect wallet to view collections");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, chainId]);
 
   // const account = "0x0B172a4E265AcF4c2E0aB238F63A44bf29bBd158";
@@ -86,7 +87,7 @@ const Collection = () => {
     }
 
     function imageurl(url) {
-      const string = url;
+      // const string = url;
       const check = url.substr(16, 4);
       if (check === "ipfs") {
         const manipulated = url.substr(16, 16 + 45);
